@@ -23,9 +23,11 @@ public class Deck {
 	public void setName(String name) { this.name = name; }
 	
 	public boolean hasCard(Card card) { return cards.contains(card); }
+	
 	public void addCard(Card card) { 
 		if (!(cards.contains(card))) cards.add(card);
 	} 
+	
 	public boolean deleteCard(String front) {
 		Card temp = new Card(front, null);
 		return cards.remove(temp);
