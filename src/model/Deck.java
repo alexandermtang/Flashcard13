@@ -1,13 +1,15 @@
 package model;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collections;
 
 import util.FrontComparator;
 import util.StrengthComparator;
 
-public class Deck {
+public class Deck implements Comparable<Deck>, Serializable {
 	
+	private static final long serialVersionUID = 1L;
 	private String name;
 	private ArrayList<Card> cards;
 	
@@ -49,6 +51,10 @@ public class Deck {
 	
 	public void sortByStrength() { 
 		Collections.sort(cards, new StrengthComparator());
+	}
+	
+	public int compareTo(Deck deck) {
+		return name.compareToIgnoreCase(deck.getName());
 	}
 
 	public boolean equals(Object o) {

@@ -1,9 +1,11 @@
 package model;
 
+import java.io.Serializable;
 import java.util.Calendar;
 
-public class Card implements Comparable<Card> {
+public class Card implements Comparable<Card>, Serializable {
 	
+	private static final long serialVersionUID = 1L;
 	private String front;
 	private Object back;
 	private int right;
