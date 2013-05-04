@@ -7,6 +7,6 @@ import model.Card;
 public class FrontComparator implements Comparator<Card> {
 	
 	public int compare(Card a, Card b) {
-		return a.getFront().compareTo(b.getFront());
+		return a.getFront().compareToIgnoreCase(b.getFront());
 	}
 }

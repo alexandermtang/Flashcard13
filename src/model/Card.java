@@ -32,6 +32,6 @@ public class Card implements Comparable<Card> {
 	public boolean equals(Object o) {
 		if (o == null || !(o instanceof Card)) return false;
 		Card other = (Card)o;
-		return front.equals(other.getFront());
+		return front.equalsIgnoreCase(other.getFront());
 	}
 }

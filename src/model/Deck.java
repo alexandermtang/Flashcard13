@@ -51,4 +51,9 @@ public class Deck {
 		Collections.sort(cards, new StrengthComparator());
 	}
 
+	public boolean equals(Object o) {
+		if (o == null || !(o instanceof Deck)) return false;
+		Deck other = (Deck)o;
+		return name.equalsIgnoreCase(other.getName());
+	}
 }
