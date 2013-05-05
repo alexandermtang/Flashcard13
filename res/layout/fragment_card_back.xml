@@ -4,9 +4,9 @@
     android:orientation="vertical"
     android:background="#a6c"
     android:padding="16dp"
-    android:gravity="bottom">
+    android:gravity="center">
 
-    <TextView android:id="@android:id/text1"
+    <TextView android:id="@+id/text_back"
         style="?android:textAppearanceLarge"
         android:textStyle="bold"
         android:textColor="#fff"
