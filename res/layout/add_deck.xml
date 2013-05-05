@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical" >
+    
+    <!--  Title bar -->
+    <TextView  
+        android:layout_width="match_parent" 
+        android:layout_height="30dp" 
+        android:text="@string/add_song"
+        android:gravity="center"
+    />
+    
+    <!--  Form for adding -->
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:padding="20dp"
+        >
+        
+        <!--  Song name label -->
+        <TextView  
+            android:layout_width="wrap_content" 
+            android:layout_height="wrap_content" 
+            android:text="@string/add_song_name_label"
+            android:paddingBottom="2dp"/>
+        
+        <!-- Song name field -->
+        <EditText
+            android:id="@+id/song_name"
+            android:layout_width="match_parent"
+            android:background="@android:drawable/editbox_background"
+            android:hint="@string/add_song_name_hint"
+            android:layout_height="wrap_content"
+        />
+        
+        <!--  Song artist label -->
+        <TextView  
+            android:layout_width="wrap_content" 
+            android:layout_height="wrap_content" 
+            android:text="@string/add_song_artist_label"
+            android:paddingTop="10dp"
+            android:paddingBottom="2dp"/>
+        
+        <!-- Song artist field -->
+        <EditText
+            android:id="@+id/song_artist"
+            android:layout_width="match_parent"
+            android:background="@android:drawable/editbox_background"
+            android:hint="@string/add_song_artist_hint"
+            android:layout_height="wrap_content"
+        />
+        
+        <!--  Song album label -->
+        <TextView  
+            android:layout_width="wrap_content" 
+            android:layout_height="wrap_content" 
+            android:text="@string/add_song_album_label"
+            android:paddingTop="10dp"
+            android:paddingBottom="2dp"/>
+        
+        <!-- Song album field -->
+        <EditText
+            android:id="@+id/song_album"
+            android:layout_width="match_parent"
+            android:background="@android:drawable/editbox_background"
+            android:hint="@string/add_song_album_hint"
+            android:layout_height="wrap_content"
+        />
+        
+        <!--  Song year label -->
+        <TextView  
+            android:layout_width="wrap_content" 
+            android:layout_height="wrap_content" 
+            android:text="@string/add_song_year_label"
+            android:paddingTop="10dp"
+            android:paddingBottom="2dp"/>
+        
+        <!-- Song year field -->
+        <EditText
+            android:id="@+id/song_year"
+            android:layout_width="wrap_content"
+            android:inputType="number"
+            android:background="@android:drawable/editbox_background"
+            android:hint="@string/add_song_year_hint"
+            android:layout_height="wrap_content"
+        />
+        
+        <!--  Buttons for save and cancel -->
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:paddingTop="10dp">
+    
+            <Button 
+                android:id="@+id/song_save"
+                android:text="@string/add_song_save_label"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="3dp"
+                android:layout_marginRight="15dp"/>
+            
+            <Button
+                android:id="@+id/song_cancel"
+                android:text="@string/add_song_cancel_label"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="3dp"/>
+                
+        </LinearLayout>
+        
+    </LinearLayout>   
+    
+</LinearLayout>

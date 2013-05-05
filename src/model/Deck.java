@@ -62,4 +62,8 @@ public class Deck implements Comparable<Deck>, Serializable {
 		Deck other = (Deck)o;
 		return name.equalsIgnoreCase(other.getName());
 	}
+	
+	public String toString() {
+		return name + "\n" + size() + " card" + (size() == 1 ? "" : "s");
+	}
 }

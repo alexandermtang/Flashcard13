@@ -5,7 +5,7 @@
     android:versionName="1.0" >
 
     <uses-sdk
-        android:minSdkVersion="10"
+        android:minSdkVersion="14"
         android:targetSdkVersion="17" />
 
     <application
@@ -22,6 +22,13 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        
+        <activity
+            android:name="com.example.flashcard13.ViewCardActivity"
+            android:label="@string/title_view_card" 
+            android:parentActivityName="com.example.flashcard13.MainActivity" >
+        </activity>
+        
     </application>
 
 </manifest>
