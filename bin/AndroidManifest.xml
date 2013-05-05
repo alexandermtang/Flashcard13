@@ -22,13 +22,21 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        
         <activity
-            android:name="com.example.flashcard13.ViewCardActivity"
-            android:label="@string/title_view_card" 
+            android:name="com.example.flashcard13.AddDeckActivity"
+            android:label="@string/title_view_decks"
             android:parentActivityName="com.example.flashcard13.MainActivity" >
         </activity>
-        
+        <activity
+            android:name="com.example.flashcard13.ViewDeckActivity"
+            android:label="@string/title_view_deck"
+            android:parentActivityName="com.example.flashcard13.MainActivity" >
+        </activity>
+        <activity
+            android:name="com.example.flashcard13.ViewCardActivity"
+            android:label="@string/title_view_card"
+            android:parentActivityName="com.example.flashcard13.ViewDeckActivity" >
+        </activity>
     </application>
 
 </manifest>

@@ -8,7 +8,7 @@
     <TextView  
         android:layout_width="match_parent" 
         android:layout_height="30dp" 
-        android:text="@string/add_song"
+        android:text="@string/add_deck"
         android:gravity="center"
     />
     
@@ -24,67 +24,15 @@
         <TextView  
             android:layout_width="wrap_content" 
             android:layout_height="wrap_content" 
-            android:text="@string/add_song_name_label"
+            android:text="@string/add_deck_name_label"
             android:paddingBottom="2dp"/>
         
         <!-- Song name field -->
         <EditText
-            android:id="@+id/song_name"
+            android:id="@+id/deck_name"
             android:layout_width="match_parent"
             android:background="@android:drawable/editbox_background"
-            android:hint="@string/add_song_name_hint"
-            android:layout_height="wrap_content"
-        />
-        
-        <!--  Song artist label -->
-        <TextView  
-            android:layout_width="wrap_content" 
-            android:layout_height="wrap_content" 
-            android:text="@string/add_song_artist_label"
-            android:paddingTop="10dp"
-            android:paddingBottom="2dp"/>
-        
-        <!-- Song artist field -->
-        <EditText
-            android:id="@+id/song_artist"
-            android:layout_width="match_parent"
-            android:background="@android:drawable/editbox_background"
-            android:hint="@string/add_song_artist_hint"
-            android:layout_height="wrap_content"
-        />
-        
-        <!--  Song album label -->
-        <TextView  
-            android:layout_width="wrap_content" 
-            android:layout_height="wrap_content" 
-            android:text="@string/add_song_album_label"
-            android:paddingTop="10dp"
-            android:paddingBottom="2dp"/>
-        
-        <!-- Song album field -->
-        <EditText
-            android:id="@+id/song_album"
-            android:layout_width="match_parent"
-            android:background="@android:drawable/editbox_background"
-            android:hint="@string/add_song_album_hint"
-            android:layout_height="wrap_content"
-        />
-        
-        <!--  Song year label -->
-        <TextView  
-            android:layout_width="wrap_content" 
-            android:layout_height="wrap_content" 
-            android:text="@string/add_song_year_label"
-            android:paddingTop="10dp"
-            android:paddingBottom="2dp"/>
-        
-        <!-- Song year field -->
-        <EditText
-            android:id="@+id/song_year"
-            android:layout_width="wrap_content"
-            android:inputType="number"
-            android:background="@android:drawable/editbox_background"
-            android:hint="@string/add_song_year_hint"
+            android:hint="@string/add_deck_name_hint"
             android:layout_height="wrap_content"
         />
         
@@ -97,16 +45,18 @@
             android:paddingTop="10dp">
     
             <Button 
-                android:id="@+id/song_save"
-                android:text="@string/add_song_save_label"
+                style="?android:textAppearance"
+                android:id="@+id/deck_save"
+                android:text="@string/add_deck_save_label"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:padding="3dp"
                 android:layout_marginRight="15dp"/>
             
             <Button
-                android:id="@+id/song_cancel"
-                android:text="@string/add_song_cancel_label"
+                style="?android:textAppearance"
+                android:id="@+id/deck_cancel"
+                android:text="@string/add_deck_cancel_label"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:padding="3dp"/>

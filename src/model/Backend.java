@@ -7,6 +7,7 @@ import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.util.ArrayList;
+import java.util.Collections;
 
 import android.content.Context;
 
@@ -65,7 +66,13 @@ public class Backend implements BackendInterface {
 			Deck deck = load(f.getName());
 			decks.add(deck);
 		}
+		Collections.sort(decks);
 		return decks;
+	}
+	
+	public boolean hasDeck(Deck deck) {
+		loadAll();
+		return decks.contains(deck);
 	}
 	
 	public boolean delete(String fileName) {
@@ -74,5 +81,13 @@ public class Backend implements BackendInterface {
 				+ fileName;
 		File file = new File(path);
 		return file.delete();
+	}
+	
+	// nuke
+	public void deleteAll() {
+		for (File f : context.getFilesDir().listFiles()) {
+			f.delete();
+		}
+		decks = new ArrayList<Deck>();
 	}
 }

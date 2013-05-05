@@ -2,7 +2,10 @@
 <resources>
 
     <string name="app_name">Flashcard13</string>
+    <string name="title_view_decks">View Decks</string>
+    <string name="title_view_deck">View Deck</string>
     <string name="title_view_card">View Card</string>
+    
     <string name="action_settings">Settings</string>
     <string name="hello_world">Hello world!</string>
 
@@ -15,15 +18,12 @@
     <string name="action_front">View back</string>
     <string name="action_back">View front</string>
     
-    <string name="add_song">Add Song</string>
-    <string name="add_song_name_label">Name: (required)</string>
-    <string name="add_song_name_hint">Song Name</string>
-    <string name="add_song_artist_label">Artist: (required)</string>
-    <string name="add_song_artist_hint">Artist</string>
-    <string name="add_song_album_label">Album:</string>
-    <string name="add_song_album_hint">Album</string>
-    <string name="add_song_year_label">Year</string>
-    <string name="add_song_year_hint">2012</string>
-    <string name="add_song_save_label">" Save "</string>
-    <string name="add_song_cancel_label">Cancel</string>
+    <string name="add_deck">Add Deck</string>
+    <string name="add_deck_name_label">Name: (required)</string>
+    <string name="add_deck_name_hint">Deck Name</string>
+    <string name="add_deck_save_label">" Save "</string>
+    <string name="add_deck_cancel_label">Cancel</string>
+    
+    
+    <string name="add_card">Add Card</string>
 </resources>

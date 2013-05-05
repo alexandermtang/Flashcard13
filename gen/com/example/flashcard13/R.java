@@ -33,51 +33,49 @@ public final class R {
     }
     public static final class id {
         public static final int action_flip=0x7f060000;
-        public static final int action_settings=0x7f06000a;
-        public static final int container=0x7f060009;
-        public static final int song_album=0x7f060003;
-        public static final int song_artist=0x7f060002;
-        public static final int song_cancel=0x7f060006;
-        public static final int song_name=0x7f060001;
-        public static final int song_save=0x7f060005;
-        public static final int song_year=0x7f060004;
-        public static final int text_back=0x7f060007;
-        public static final int text_front=0x7f060008;
+        public static final int action_settings=0x7f060009;
+        public static final int add_card=0x7f060008;
+        public static final int add_deck=0x7f060004;
+        public static final int container=0x7f060007;
+        public static final int deck_cancel=0x7f060003;
+        public static final int deck_name=0x7f060001;
+        public static final int deck_save=0x7f060002;
+        public static final int text_back=0x7f060005;
+        public static final int text_front=0x7f060006;
     }
     public static final class integer {
         public static final int card_flip_time_full=0x7f070000;
         public static final int card_flip_time_half=0x7f070001;
     }
     public static final class layout {
-        public static final int activity_main=0x7f030000;
-        public static final int add_deck=0x7f030001;
-        public static final int fragment_card_back=0x7f030002;
-        public static final int fragment_card_front=0x7f030003;
-        public static final int view_card_activity=0x7f030004;
+        public static final int add_deck=0x7f030000;
+        public static final int deck=0x7f030001;
+        public static final int deck_list=0x7f030002;
+        public static final int fragment_card_back=0x7f030003;
+        public static final int fragment_card_front=0x7f030004;
+        public static final int view_card_activity=0x7f030005;
+        public static final int view_deck_activity=0x7f030006;
     }
     public static final class menu {
         public static final int main=0x7f0a0000;
     }
     public static final class string {
-        public static final int action_back=0x7f080007;
-        public static final int action_front=0x7f080006;
-        public static final int action_settings=0x7f080002;
-        public static final int add_song=0x7f080008;
-        public static final int add_song_album_hint=0x7f08000e;
-        public static final int add_song_album_label=0x7f08000d;
-        public static final int add_song_artist_hint=0x7f08000c;
-        public static final int add_song_artist_label=0x7f08000b;
-        public static final int add_song_cancel_label=0x7f080012;
-        public static final int add_song_name_hint=0x7f08000a;
-        public static final int add_song_name_label=0x7f080009;
-        public static final int add_song_save_label=0x7f080011;
-        public static final int add_song_year_hint=0x7f080010;
-        public static final int add_song_year_label=0x7f08000f;
+        public static final int action_back=0x7f080009;
+        public static final int action_front=0x7f080008;
+        public static final int action_settings=0x7f080004;
+        public static final int add_card=0x7f08000f;
+        public static final int add_deck=0x7f08000a;
+        public static final int add_deck_cancel_label=0x7f08000e;
+        public static final int add_deck_name_hint=0x7f08000c;
+        public static final int add_deck_name_label=0x7f08000b;
+        public static final int add_deck_save_label=0x7f08000d;
         public static final int app_name=0x7f080000;
-        public static final int back=0x7f080005;
-        public static final int front=0x7f080004;
-        public static final int hello_world=0x7f080003;
-        public static final int title_view_card=0x7f080001;
+        public static final int back=0x7f080007;
+        public static final int front=0x7f080006;
+        public static final int hello_world=0x7f080005;
+        public static final int title_view_card=0x7f080003;
+        public static final int title_view_deck=0x7f080002;
+        public static final int title_view_decks=0x7f080001;
     }
     public static final class style {
         /** 
