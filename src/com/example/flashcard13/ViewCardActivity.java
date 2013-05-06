@@ -49,7 +49,6 @@ public class ViewCardActivity extends Activity
         card = deck.getCard(bundle.getString(CARD_FRONT));
         
         
-        
         getFragmentManager().addOnBackStackChangedListener(this);
     }
 
