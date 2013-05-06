@@ -5,20 +5,14 @@
     <string name="title_view_deck">View Deck</string>
     <string name="title_add_deck">Add/Edit Deck</string>
     <string name="title_view_card">View Card</string>
-    <string name="title_add_card">Add Card</string>
+    <string name="title_add_card">Add/Edit Card</string>
     
     <string name="action_settings">Settings</string>
     <string name="hello_world">Hello world!</string>
   
-    <!-- Context menu -->
     <string name="edit">Edit</string>
     <string name="delete">Delete</string>
 
-    
-    <string name="front">FRONT TEST</string>
-    <string name="back">BACK TEST</string>
-    
-    
     <string name="action_front">View back</string>
     <string name="action_back">View front</string>
     
@@ -30,7 +24,6 @@
   
     
     <string name="add_card">Add Card</string>
-    
     <string name="add_front_name_label">Front: (required)</string>
     <string name="add_front_name_hint">Front of card</string>
     <string name="add_back_name_label">Back: (required)</string>

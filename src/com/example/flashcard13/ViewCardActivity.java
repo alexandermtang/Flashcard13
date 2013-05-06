@@ -25,10 +25,10 @@ public class ViewCardActivity extends Activity
     public static final String CARD_FRONT = "cardFrontFrag";
     public static final String CARD_BACK = "cardBackFrag";
     
-    Backend backend = Backend.getInstance(this);
+    private Backend backend = Backend.getInstance(this);
     
-    CardFrontFragment cardFrontFrag;
-    CardBackFragment cardBackFrag;
+    private CardFrontFragment cardFrontFrag;
+    private CardBackFragment cardBackFrag;
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -118,9 +118,6 @@ public class ViewCardActivity extends Activity
 
     public static class CardFrontFragment extends Fragment {
     	
-    	public CardFrontFragment() {
-    	}
-
         public View onCreateView(LayoutInflater inflater, ViewGroup container,
                 Bundle savedInstanceState) {
             return inflater.inflate(R.layout.fragment_card_front, container, false);
@@ -135,9 +132,6 @@ public class ViewCardActivity extends Activity
     }
 
     public static class CardBackFragment extends Fragment {
-    	
-        public CardBackFragment() {
-        }
 
         public View onCreateView(LayoutInflater inflater, ViewGroup container,
                 Bundle savedInstanceState) {

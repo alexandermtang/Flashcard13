@@ -67,28 +67,24 @@ public final class R {
         public static final int options_menu=0x7f0a0001;
     }
     public static final class string {
-        public static final int action_back=0x7f08000c;
-        public static final int action_front=0x7f08000b;
+        public static final int action_back=0x7f08000a;
+        public static final int action_front=0x7f080009;
         public static final int action_settings=0x7f080005;
-        public static final int add_back_name_hint=0x7f080016;
-        public static final int add_back_name_label=0x7f080015;
-        public static final int add_card=0x7f080012;
-        public static final int add_card_cancel_label=0x7f080018;
-        public static final int add_card_save_label=0x7f080017;
-        public static final int add_deck=0x7f08000d;
-        public static final int add_deck_cancel_label=0x7f080011;
-        public static final int add_deck_name_hint=0x7f08000f;
-        public static final int add_deck_name_label=0x7f08000e;
-        public static final int add_deck_save_label=0x7f080010;
-        public static final int add_front_name_hint=0x7f080014;
-        public static final int add_front_name_label=0x7f080013;
+        public static final int add_back_name_hint=0x7f080014;
+        public static final int add_back_name_label=0x7f080013;
+        public static final int add_card=0x7f080010;
+        public static final int add_card_cancel_label=0x7f080016;
+        public static final int add_card_save_label=0x7f080015;
+        public static final int add_deck=0x7f08000b;
+        public static final int add_deck_cancel_label=0x7f08000f;
+        public static final int add_deck_name_hint=0x7f08000d;
+        public static final int add_deck_name_label=0x7f08000c;
+        public static final int add_deck_save_label=0x7f08000e;
+        public static final int add_front_name_hint=0x7f080012;
+        public static final int add_front_name_label=0x7f080011;
         public static final int app_name=0x7f080000;
-        public static final int back=0x7f08000a;
         public static final int delete=0x7f080008;
-        /**  Context menu 
-         */
         public static final int edit=0x7f080007;
-        public static final int front=0x7f080009;
         public static final int hello_world=0x7f080006;
         public static final int title_add_card=0x7f080004;
         public static final int title_add_deck=0x7f080002;

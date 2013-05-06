@@ -1,18 +1,19 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#fff"
+    android:gravity="center"
     android:orientation="vertical"
-    android:background="#a6c"
-    android:padding="16dp"
-    android:gravity="center">
+    android:padding="16dp" >
 
-    <TextView android:id="@+id/text_back"
+    <TextView
+        android:id="@+id/text_back"
         style="?android:textAppearanceLarge"
-        android:textStyle="bold"
-        android:textColor="#fff"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/back" />
+        android:gravity="center"
+        android:text=""
+        android:textColor="#000"
+        android:textStyle="bold" />
 
-  
 </LinearLayout>

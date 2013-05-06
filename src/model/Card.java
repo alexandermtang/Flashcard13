@@ -21,7 +21,7 @@ public class Card implements Comparable<Card>, Serializable {
 	public String getFront() { return front; }
 	public Object getBack() { return back; }
 	public Calendar getCal() { return cal; }
-	public float getStrength() { return (float) right / (right + wrong); }
+	public double getStrength() { return (double) right / (right + wrong); }
 	
 	public void setFront(String front) { this.front = front; }
 	public void setBack(Object back) { this.back = back; }
@@ -35,5 +35,7 @@ public class Card implements Comparable<Card>, Serializable {
 		Card other = (Card)o;
 		return front.equalsIgnoreCase(other.getFront());
 	}
-	public String toString() { return front; }
+	public String toString() { 
+		return front + "\n" + Math.round(getStrength()) + "%"; 
+	}
 }

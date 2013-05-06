@@ -18,7 +18,7 @@ public class AddDeckActivity extends FragmentActivity {
 	Backend backend = Backend.getInstance(this);
 	EditText deckName;
 	Button deckCancel, deckSave;
-	String incompleteMessage="", duplicateMessage="", oldDeckName;
+	String incompleteMessage = "", duplicateMessage = "", oldDeckName;
 	Bundle bundle;
 
 	protected void onCreate(Bundle savedInstanceState) {
@@ -36,7 +36,7 @@ public class AddDeckActivity extends FragmentActivity {
 				finish();
 			}
 		});
-		
+
 		bundle = getIntent().getExtras();
 		if (bundle == null) {
 			addDeck();
@@ -44,7 +44,7 @@ public class AddDeckActivity extends FragmentActivity {
 			editDeck();
 		}
 	}
-	
+
 	private void addDeck() {
 		deckSave.setOnClickListener(new OnClickListener() {
 			public void onClick(View view) {
@@ -56,7 +56,7 @@ public class AddDeckActivity extends FragmentActivity {
 					incompleteMessage();
 					return;
 				}
-				
+
 				// duplicate deck name
 				if (backend.hasDeck(new Deck(name))) {
 					duplicateMessage += name;
@@ -65,7 +65,7 @@ public class AddDeckActivity extends FragmentActivity {
 				}
 
 				Bundle bundle = new Bundle();
-				bundle.putString(DECK_NAME, deckName.getText().toString().trim());
+				bundle.putString(DECK_NAME, name.trim());
 
 				Intent intent = new Intent();
 				intent.putExtras(bundle);
@@ -75,11 +75,11 @@ public class AddDeckActivity extends FragmentActivity {
 			}
 		});
 	}
-	
+
 	private void editDeck() {
 		oldDeckName = bundle.getString(OLD_DECK_NAME);
-		deckName.setText(oldDeckName);
-		
+		deckName.setHint(oldDeckName);
+
 		deckSave.setOnClickListener(new OnClickListener() {
 			public void onClick(View view) {
 
@@ -90,7 +90,7 @@ public class AddDeckActivity extends FragmentActivity {
 					incompleteMessage();
 					return;
 				}
-				
+
 				// duplicate deck name
 				if (backend.hasDeck(new Deck(name))) {
 					duplicateMessage += name;
