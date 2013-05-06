@@ -14,6 +14,7 @@ import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
@@ -58,6 +59,12 @@ public class ViewCardActivity extends Activity
         }
         
         getFragmentManager().addOnBackStackChangedListener(this);
+        View view = (View) findViewById(R.id.container);
+        view.setOnClickListener(new OnClickListener() {
+			public void onClick(View view) {
+				flipCard();
+			}
+        });
     }
 
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -123,11 +130,11 @@ public class ViewCardActivity extends Activity
             return inflater.inflate(R.layout.fragment_card_front, container, false);
         }
         
-        public void onActivityCreated(Bundle savedInstanceState) {
-        	super.onActivityCreated(savedInstanceState);
+        public void onResume() {
+        	super.onResume();
         	String front = getArguments().getString(CARD_FRONT);
         	TextView text = (TextView) getActivity().findViewById(R.id.text_front);
-        	text.setText(front);
+        	if (text != null) text.setText(front);
         }
     }
 
@@ -138,11 +145,11 @@ public class ViewCardActivity extends Activity
             return inflater.inflate(R.layout.fragment_card_back, container, false);
         }
         
-        public void onActivityCreated(Bundle savedInstanceState) {
-        	super.onActivityCreated(savedInstanceState);
+        public void onResume() {
+        	super.onResume();
         	String back = getArguments().getString(CARD_BACK);
         	TextView text = (TextView) getActivity().findViewById(R.id.text_back);
-        	text.setText(back);
+        	if (text != null) text.setText(back);
         }
     }
 }

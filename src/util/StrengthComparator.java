@@ -11,5 +11,4 @@ public class StrengthComparator implements Comparator<Card> {
 		if (aStrength == bStrength) return 0;
 		return aStrength < bStrength ? -1 : 1;
 	}
-
 }

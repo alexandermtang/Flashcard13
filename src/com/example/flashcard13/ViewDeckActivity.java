@@ -88,7 +88,9 @@ public class ViewDeckActivity extends ListActivity {
 	        case R.id.edit:
 	        	Intent intent = new Intent(this, AddCardActivity.class);
 	        	Bundle bundle = new Bundle();
-	        	//bundle.putString(AddDeckActivity.OLD_DECK_NAME, currCard.getName());
+	        	bundle.putString(DECK_NAME, deck.getName());
+	        	bundle.putString(AddCardActivity.OLD_CARD_FRONT, currCard.getFront());
+	        	bundle.putString(AddCardActivity.OLD_CARD_BACK, (String) currCard.getBack());
 	        	intent.putExtras(bundle);
 	        	startActivityForResult(intent, EDIT_CARD_ACTIVITY);
 	            return true;
@@ -122,18 +124,16 @@ public class ViewDeckActivity extends ListActivity {
 		}
 		
 		if (requestCode == EDIT_CARD_ACTIVITY) {
-			String oldCardFront = bundle.getString(AddCardActivity.CARD_FRONT);
-			String oldCardBack = bundle.getString(AddCardActivity.CARD_BACK);
-			
-			Card newCard = deck.getCard(oldCardFront);
-			newCard.setFront(front);
-			newCard.setBack(back);
+			String oldCardFront = bundle.getString(AddCardActivity.OLD_CARD_FRONT);
+//			String oldCardBack = bundle.getString(AddCardActivity.OLD_CARD_BACK);
 			
 			deck.deleteCard(oldCardFront);
+			
+			Card newCard = new Card(front, back);
 			deck.addCard(newCard);
 			backend.save(deck);
 			
-			//decks = backend.loadAll();
+			cards = deck.getCards();
 		}
 
 		listView.setAdapter(new ArrayAdapter<Card>(this, R.layout.card, cards));

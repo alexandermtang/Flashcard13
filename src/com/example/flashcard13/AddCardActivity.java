@@ -21,17 +21,17 @@ public class AddCardActivity extends FragmentActivity {
 	Backend backend = Backend.getInstance(this);
 	EditText cardFront, cardBack;
 	Button cardCancel, cardSave;
-	String incompleteMessage="", duplicateMessage="";
+	String incompleteMessage = "", duplicateMessage = "";
 	String deckName, oldCardFront, oldCardBack;
 	Bundle bundle;
 
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.add_card);
-		
-		Bundle bundle = getIntent().getExtras();
+
+		bundle = getIntent().getExtras();
 		deckName = bundle.getString(ViewDeckActivity.DECK_NAME);
-		
+
 		cardFront = (EditText) findViewById(R.id.front_name);
 		cardBack = (EditText) findViewById(R.id.back_name);
 
@@ -45,29 +45,29 @@ public class AddCardActivity extends FragmentActivity {
 			}
 		});
 		
-		bundle = getIntent().getExtras();
-		if(bundle == null){
+		if (bundle.containsKey(OLD_CARD_FRONT)) {
+			editCard();
+		} else {
 			addCard();
 		}
-		else{
-			editCard();
-		}
+		
 	}
-	private void addCard(){
+
+	private void addCard() {
 		cardSave.setOnClickListener(new OnClickListener() {
 			public void onClick(View view) {
 
 				String front = cardFront.getText().toString();
 				String back = cardBack.getText().toString();
 
-				if (front == null || front.length() == 0 
-						|| back == null || back.length() == 0) {
+				if (front == null || front.length() == 0 || back == null
+						|| back.length() == 0) {
 					incompleteMessage += "Front/Back";
 					incompleteMessage();
 					return;
 				}
-				
-				// duplicate card front 
+
+				// duplicate card front
 				Deck deck = backend.load(deckName);
 				if (deck.hasCard(new Card(front, back))) {
 					duplicateMessage += "Card with front: " + front;
@@ -76,10 +76,8 @@ public class AddCardActivity extends FragmentActivity {
 				}
 
 				Bundle bundle = new Bundle();
-				bundle.putString(CARD_FRONT, cardFront.getText().toString().trim());
-				bundle.putString(CARD_BACK, cardBack.getText().toString().trim());
-				bundle.putString(OLD_CARD_FRONT, cardFront.getText().toString().trim());
-				bundle.putString(OLD_CARD_BACK, cardFront.getText().toString().trim());
+				bundle.putString(CARD_FRONT, front.trim());
+				bundle.putString(CARD_BACK, back.trim());
 
 				Intent intent = new Intent();
 				intent.putExtras(bundle);
@@ -89,35 +87,38 @@ public class AddCardActivity extends FragmentActivity {
 			}
 		});
 	}
-	
-	private void editCard(){
+
+	private void editCard() {
 		oldCardFront = bundle.getString(OLD_CARD_FRONT);
-		cardFront.setText(oldCardFront);
-		cardBack.setText(oldCardBack);
-		
+		oldCardBack = bundle.getString(OLD_CARD_BACK);
+		cardFront.setHint(oldCardFront);
+		cardBack.setHint(oldCardBack);
+
 		cardSave.setOnClickListener(new OnClickListener() {
 			public void onClick(View view) {
-				String frontName = cardFront.getText().toString().trim();
-				String backName = cardBack.getText().toString().trim();
-				
-				if (frontName == null || frontName.length() == 0 
-						|| backName == null || backName.length() == 0) {
+				String front = cardFront.getText().toString();
+				String back = cardBack.getText().toString();
+
+				if (front == null || front.length() == 0 || back == null
+						|| back.length() == 0) {
 					incompleteMessage += "Front and Back";
 					incompleteMessage();
 					return;
 				}
-				
-				// duplicate deck name
-//				if (deck.hasCard(new Card(frontName, backName))) {
-//					duplicateMessage += frontName;
-//					duplicateMessage();
-//					return;
-//				}
-//				
+
+				// duplicate card front
+				Deck deck = backend.load(deckName);
+				if (deck.hasCard(new Card(front, back))) {
+					duplicateMessage += "Card";
+					duplicateMessage();
+					return;
+				}
+
 				Bundle bundle = new Bundle();
 				bundle.putString(OLD_CARD_FRONT, oldCardFront);
 				bundle.putString(OLD_CARD_BACK, oldCardBack);
-//				bundle.putString(DECK_NAME, name);
+				bundle.putString(CARD_FRONT, front.trim());
+				bundle.putString(CARD_BACK, back.trim());
 
 				Intent intent = new Intent();
 				intent.putExtras(bundle);
