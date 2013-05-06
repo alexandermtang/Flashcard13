@@ -10,7 +10,6 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.v4.app.NavUtils;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -23,31 +22,40 @@ public class ViewCardActivity extends Activity
     private Handler mHandler = new Handler();
     private boolean mShowingBack = false;
     
-    public static final String CARD_FRONT = "cardFront";
-    public static final String CARD_BACK = "cardBack";
+    public static final String CARD_FRONT = "cardFrontFrag";
+    public static final String CARD_BACK = "cardBackFrag";
     
     Backend backend = Backend.getInstance(this);
-    Deck deck;
-    Card card;
-    static TextView frontView, backView;
+    
+    CardFrontFragment cardFrontFrag;
+    CardBackFragment cardBackFrag;
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.view_card_activity);
-
+        
+        Bundle bundle = getIntent().getExtras();
+        Deck deck = backend.load(bundle.getString(ViewDeckActivity.DECK_NAME));
+        Card card = deck.getCard(bundle.getString(CARD_FRONT));
+        
+        cardFrontFrag = new CardFrontFragment();
+        bundle = new Bundle();
+        bundle.putString(CARD_FRONT, card.getFront());
+        cardFrontFrag.setArguments(bundle);
+        
+        cardBackFrag = new CardBackFragment();
+        bundle = new Bundle();
+        bundle.putString(CARD_BACK, (String)card.getBack());
+        cardBackFrag.setArguments(bundle);
+        
         if (savedInstanceState == null) {
             getFragmentManager()
                     .beginTransaction()
-                    .add(R.id.container, new CardFrontFragment())
+                    .add(R.id.container, cardFrontFrag)
                     .commit();
         } else {
             mShowingBack = (getFragmentManager().getBackStackEntryCount() > 0);
         }
-        
-        Bundle bundle = getIntent().getExtras();
-        deck = backend.load(bundle.getString(ViewDeckActivity.DECK_NAME));
-        card = deck.getCard(bundle.getString(CARD_FRONT));
-        
         
         getFragmentManager().addOnBackStackChangedListener(this);
     }
@@ -92,10 +100,10 @@ public class ViewCardActivity extends Activity
                 .setCustomAnimations(
                         R.animator.card_flip_right_in, R.animator.card_flip_right_out,
                         R.animator.card_flip_left_in, R.animator.card_flip_left_out)
-                .replace(R.id.container, new CardBackFragment())
+                .replace(R.id.container, cardBackFrag)
                 .addToBackStack(null)
                 .commit();
-        
+            
         mHandler.post(new Runnable() {
             public void run() {
                 invalidateOptionsMenu();
@@ -109,22 +117,38 @@ public class ViewCardActivity extends Activity
     }
 
     public static class CardFrontFragment extends Fragment {
-        public CardFrontFragment() {
-        }
+    	
+    	public CardFrontFragment() {
+    	}
 
         public View onCreateView(LayoutInflater inflater, ViewGroup container,
                 Bundle savedInstanceState) {
             return inflater.inflate(R.layout.fragment_card_front, container, false);
         }
+        
+        public void onActivityCreated(Bundle savedInstanceState) {
+        	super.onActivityCreated(savedInstanceState);
+        	String front = getArguments().getString(CARD_FRONT);
+        	TextView text = (TextView) getActivity().findViewById(R.id.text_front);
+        	text.setText(front);
+        }
     }
 
     public static class CardBackFragment extends Fragment {
+    	
         public CardBackFragment() {
         }
 
         public View onCreateView(LayoutInflater inflater, ViewGroup container,
                 Bundle savedInstanceState) {
             return inflater.inflate(R.layout.fragment_card_back, container, false);
+        }
+        
+        public void onActivityCreated(Bundle savedInstanceState) {
+        	super.onActivityCreated(savedInstanceState);
+        	String back = getArguments().getString(CARD_BACK);
+        	TextView text = (TextView) getActivity().findViewById(R.id.text_back);
+        	text.setText(back);
         }
     }
 }

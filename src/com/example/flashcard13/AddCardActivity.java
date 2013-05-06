@@ -15,12 +15,15 @@ public class AddCardActivity extends FragmentActivity {
 
 	public static final String CARD_FRONT = "cardFront";
 	public static final String CARD_BACK = "cardBack";
+	public static final String OLD_CARD_FRONT = "oldCardFront";
+	public static final String OLD_CARD_BACK = "oldCardBack";
 
 	Backend backend = Backend.getInstance(this);
 	EditText cardFront, cardBack;
 	Button cardCancel, cardSave;
 	String incompleteMessage="", duplicateMessage="";
-	String deckName;
+	String deckName, oldCardFront, oldCardBack;
+	Bundle bundle;
 
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -41,7 +44,16 @@ public class AddCardActivity extends FragmentActivity {
 				finish();
 			}
 		});
-
+		
+		bundle = getIntent().getExtras();
+		if(bundle == null){
+			addCard();
+		}
+		else{
+			editCard();
+		}
+	}
+	private void addCard(){
 		cardSave.setOnClickListener(new OnClickListener() {
 			public void onClick(View view) {
 
@@ -66,6 +78,46 @@ public class AddCardActivity extends FragmentActivity {
 				Bundle bundle = new Bundle();
 				bundle.putString(CARD_FRONT, cardFront.getText().toString().trim());
 				bundle.putString(CARD_BACK, cardBack.getText().toString().trim());
+				bundle.putString(OLD_CARD_FRONT, cardFront.getText().toString().trim());
+				bundle.putString(OLD_CARD_BACK, cardFront.getText().toString().trim());
+
+				Intent intent = new Intent();
+				intent.putExtras(bundle);
+
+				setResult(RESULT_OK, intent);
+				finish();
+			}
+		});
+	}
+	
+	private void editCard(){
+		oldCardFront = bundle.getString(OLD_CARD_FRONT);
+		cardFront.setText(oldCardFront);
+		cardBack.setText(oldCardBack);
+		
+		cardSave.setOnClickListener(new OnClickListener() {
+			public void onClick(View view) {
+				String frontName = cardFront.getText().toString().trim();
+				String backName = cardBack.getText().toString().trim();
+				
+				if (frontName == null || frontName.length() == 0 
+						|| backName == null || backName.length() == 0) {
+					incompleteMessage += "Front and Back";
+					incompleteMessage();
+					return;
+				}
+				
+				// duplicate deck name
+//				if (deck.hasCard(new Card(frontName, backName))) {
+//					duplicateMessage += frontName;
+//					duplicateMessage();
+//					return;
+//				}
+//				
+				Bundle bundle = new Bundle();
+				bundle.putString(OLD_CARD_FRONT, oldCardFront);
+				bundle.putString(OLD_CARD_BACK, oldCardBack);
+//				bundle.putString(DECK_NAME, name);
 
 				Intent intent = new Intent();
 				intent.putExtras(bundle);

@@ -76,11 +76,7 @@ public class Backend implements BackendInterface {
 	}
 	
 	public boolean delete(String fileName) {
-		// path MIGHT BE WRONG, need to test
-		String path = context.getFilesDir().getName() + File.separator 
-				+ fileName;
-		File file = new File(path);
-		return file.delete();
+		return context.deleteFile(fileName);
 	}
 	
 	// nuke

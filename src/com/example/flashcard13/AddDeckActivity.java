@@ -13,11 +13,13 @@ import android.widget.EditText;
 public class AddDeckActivity extends FragmentActivity {
 
 	public static final String DECK_NAME = "deckName";
+	public static final String OLD_DECK_NAME = "oldDeckName";
 
 	Backend backend = Backend.getInstance(this);
 	EditText deckName;
 	Button deckCancel, deckSave;
-	String incompleteMessage="", duplicateMessage="";
+	String incompleteMessage="", duplicateMessage="", oldDeckName;
+	Bundle bundle;
 
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -34,7 +36,16 @@ public class AddDeckActivity extends FragmentActivity {
 				finish();
 			}
 		});
-
+		
+		bundle = getIntent().getExtras();
+		if (bundle == null) {
+			addDeck();
+		} else {
+			editDeck();
+		}
+	}
+	
+	private void addDeck() {
 		deckSave.setOnClickListener(new OnClickListener() {
 			public void onClick(View view) {
 
@@ -63,7 +74,41 @@ public class AddDeckActivity extends FragmentActivity {
 				finish();
 			}
 		});
+	}
+	
+	private void editDeck() {
+		oldDeckName = bundle.getString(OLD_DECK_NAME);
+		deckName.setText(oldDeckName);
+		
+		deckSave.setOnClickListener(new OnClickListener() {
+			public void onClick(View view) {
 
+				String name = deckName.getText().toString();
+
+				if (name == null || name.length() == 0) {
+					incompleteMessage += "Name";
+					incompleteMessage();
+					return;
+				}
+				
+				// duplicate deck name
+				if (backend.hasDeck(new Deck(name))) {
+					duplicateMessage += name;
+					duplicateMessage();
+					return;
+				}
+
+				Bundle bundle = new Bundle();
+				bundle.putString(OLD_DECK_NAME, oldDeckName);
+				bundle.putString(DECK_NAME, name.trim());
+
+				Intent intent = new Intent();
+				intent.putExtras(bundle);
+
+				setResult(RESULT_OK, intent);
+				finish();
+			}
+		});
 	}
 
 	private void incompleteMessage() {

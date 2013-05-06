@@ -8,16 +8,22 @@ import model.Deck;
 import android.app.ListActivity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.ContextMenu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
+import android.view.ContextMenu.ContextMenuInfo;
 import android.view.View.OnClickListener;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.AdapterView.AdapterContextMenuInfo;
 
 public class ViewDeckActivity extends ListActivity {
 
 	public static final String DECK_NAME = "deckName";
 	public static final int ADD_CARD_ACTIVITY = 0;
+	public static final int EDIT_CARD_ACTIVITY = 1;
 	
 	Backend backend = Backend.getInstance(this);
 	ListView listView;
@@ -44,7 +50,7 @@ public class ViewDeckActivity extends ListActivity {
 				addCard();
 			}
 		});
-		
+		registerForContextMenu(listView);	
 	}
 	
 	private void addCard() {
@@ -69,6 +75,33 @@ public class ViewDeckActivity extends ListActivity {
 		startActivity(intent);
 	}
 	
+	public void onCreateContextMenu(ContextMenu menu, View v, ContextMenuInfo menuInfo){
+		super.onCreateContextMenu(menu, v, menuInfo);
+		MenuInflater inflater = getMenuInflater();
+		inflater.inflate(R.menu.options_menu, menu);
+	}
+	
+	public boolean onContextItemSelected(MenuItem item){
+		AdapterContextMenuInfo info = (AdapterContextMenuInfo) item.getMenuInfo();
+		Card currCard = (Card) getListView().getItemAtPosition(info.position);
+	    switch (item.getItemId()) {
+	        case R.id.edit:
+	        	Intent intent = new Intent(this, AddCardActivity.class);
+	        	Bundle bundle = new Bundle();
+	        	//bundle.putString(AddDeckActivity.OLD_DECK_NAME, currCard.getName());
+	        	intent.putExtras(bundle);
+	        	startActivityForResult(intent, EDIT_CARD_ACTIVITY);
+	            return true;
+	        case R.id.delete:
+	        	deck.deleteCard(currCard.getFront());
+	        	backend.save(deck);
+	        	cards = deck.getCards();
+	        	listView.setAdapter(new ArrayAdapter<Card>(this, R.layout.card, cards));
+	            return true;
+	        default:
+	            return super.onContextItemSelected(item);
+	    }
+	}
 	
 	protected void onActivityResult(int requestCode, int resultCode,
 			Intent intent) {
@@ -86,6 +119,21 @@ public class ViewDeckActivity extends ListActivity {
 			Card newCard = new Card(front, back);
 			cards.add(newCard);
 			backend.save(deck);
+		}
+		
+		if (requestCode == EDIT_CARD_ACTIVITY) {
+			String oldCardFront = bundle.getString(AddCardActivity.CARD_FRONT);
+			String oldCardBack = bundle.getString(AddCardActivity.CARD_BACK);
+			
+			Card newCard = deck.getCard(oldCardFront);
+			newCard.setFront(front);
+			newCard.setBack(back);
+			
+			deck.deleteCard(oldCardFront);
+			deck.addCard(newCard);
+			backend.save(deck);
+			
+			//decks = backend.loadAll();
 		}
 
 		listView.setAdapter(new ArrayAdapter<Card>(this, R.layout.card, cards));

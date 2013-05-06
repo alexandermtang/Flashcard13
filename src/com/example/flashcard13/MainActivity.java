@@ -7,9 +7,14 @@ import model.Deck;
 import android.app.ListActivity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.ContextMenu;
+import android.view.ContextMenu.ContextMenuInfo;
 import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.widget.AdapterView.AdapterContextMenuInfo;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -17,6 +22,7 @@ import android.widget.TextView;
 public class MainActivity extends ListActivity {
 
 	public static final int ADD_DECK_ACTIVITY = 0;
+	public static final int EDIT_DECK_ACTIVITY = 1;
 
 	Backend backend = Backend.getInstance(this);
 	ListView listView;
@@ -29,7 +35,6 @@ public class MainActivity extends ListActivity {
 		listView = this.getListView();
 
 		decks = backend.loadAll();
-
 		listView.setAdapter(new ArrayAdapter<Deck>(this, R.layout.deck, decks));
 
 		TextView addDeck = (TextView) findViewById(R.id.add_deck);
@@ -38,7 +43,7 @@ public class MainActivity extends ListActivity {
 				addDeck();
 			}
 		});
-
+		registerForContextMenu(listView);
 	}
 	
 	protected void onResume() {
@@ -81,12 +86,50 @@ public class MainActivity extends ListActivity {
 			Backend.getInstance(this).save(newDeck);
 			
 			decks = backend.loadAll();
-		} else { // update
-			// myList.update(new Song(bundle.getInt(AddSong.SONG_ID), name,
-			// artist, album, year));
+		} 
+		
+		if (requestCode == EDIT_DECK_ACTIVITY) {
+			String oldDeckName = bundle.getString(AddDeckActivity.OLD_DECK_NAME);
+			
+			Deck newDeck = backend.load(oldDeckName);
+			newDeck.setName(name);
+			
+			backend.delete(oldDeckName);
+			backend.save(newDeck);
+			
+			decks = backend.loadAll();
 		}
 
 		listView.setAdapter(new ArrayAdapter<Deck>(this, R.layout.deck, decks));
+	}
+	
+	public void onCreateContextMenu(ContextMenu menu, View v, ContextMenuInfo menuInfo){
+		super.onCreateContextMenu(menu, v, menuInfo);
+		MenuInflater inflater = getMenuInflater();
+		inflater.inflate(R.menu.options_menu, menu);
+	}
+	
+	public boolean onContextItemSelected(MenuItem item){
+		AdapterContextMenuInfo info = (AdapterContextMenuInfo) item.getMenuInfo();
+		Deck currDeck = (Deck) getListView().getItemAtPosition(info.position);
+	    switch (item.getItemId()) {
+	        case R.id.edit:
+	        	Intent intent = new Intent(this, AddDeckActivity.class);
+	        	Bundle bundle = new Bundle();
+	        	bundle.putString(AddDeckActivity.OLD_DECK_NAME, currDeck.getName());
+	        	intent.putExtras(bundle);
+	        	startActivityForResult(intent, EDIT_DECK_ACTIVITY);
+	            return true;
+	        case R.id.delete:
+	            //action for delete
+	        	backend.delete(currDeck.getName());
+	        	
+	        	decks = backend.loadAll();
+	        	listView.setAdapter(new ArrayAdapter<Deck>(this, R.layout.deck, decks));
+	            return true;
+	        default:
+	            return super.onContextItemSelected(item);
+	    }
 	}
 
 	public boolean onCreateOptionsMenu(Menu menu) {
