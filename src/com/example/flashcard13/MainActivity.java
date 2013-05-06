@@ -7,7 +7,6 @@ import model.Deck;
 import android.app.ListActivity;
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.Menu;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -29,9 +28,6 @@ public class MainActivity extends ListActivity {
 
 		listView = this.getListView();
 
-		// TEMP DELETE THIS LATER
-		backend.deleteAll();
-
 		decks = backend.loadAll();
 
 		listView.setAdapter(new ArrayAdapter<Deck>(this, R.layout.deck, decks));
@@ -44,15 +40,15 @@ public class MainActivity extends ListActivity {
 		});
 
 	}
+	
+	protected void onResume() {
+		super.onResume();
+		decks = backend.loadAll();
+		listView.setAdapter(new ArrayAdapter<Deck>(this, R.layout.deck, decks));
+	}
 
 	protected void onListItemClick(ListView l, View v, int position, long id) {
 		Deck currDeck = (Deck) getListView().getItemAtPosition(position);
-
-		
-		Log.d(getClass().getSimpleName(), currDeck.getName());
-		System.out.println(currDeck.getName());
-		
-		
 		
 		Intent intent = new Intent(this, ViewDeckActivity.class);
 
@@ -65,7 +61,6 @@ public class MainActivity extends ListActivity {
 
 	void addDeck() {
 		Intent intent = new Intent(this, AddDeckActivity.class);
-
 		startActivityForResult(intent, ADD_DECK_ACTIVITY);
 	}
 
@@ -73,12 +68,10 @@ public class MainActivity extends ListActivity {
 			Intent intent) {
 		super.onActivityResult(requestCode, resultCode, intent);
 
-		if (resultCode != RESULT_OK)
-			return;
+		if (resultCode != RESULT_OK) return;
 
 		Bundle bundle = intent.getExtras();
-		if (bundle == null)
-			return;
+		if (bundle == null) return;
 
 		String name = bundle.getString(AddDeckActivity.DECK_NAME);
 

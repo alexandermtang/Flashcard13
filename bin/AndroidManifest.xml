@@ -24,7 +24,7 @@
         </activity>
         <activity
             android:name="com.example.flashcard13.AddDeckActivity"
-            android:label="@string/title_view_decks"
+            android:label="@string/title_add_deck"
             android:parentActivityName="com.example.flashcard13.MainActivity" >
         </activity>
         <activity
@@ -35,6 +35,11 @@
         <activity
             android:name="com.example.flashcard13.ViewCardActivity"
             android:label="@string/title_view_card"
+            android:parentActivityName="com.example.flashcard13.ViewDeckActivity" >
+        </activity>
+        <activity
+            android:name="com.example.flashcard13.AddCardActivity"
+            android:label="@string/title_add_card"
             android:parentActivityName="com.example.flashcard13.ViewDeckActivity" >
         </activity>
     </application>

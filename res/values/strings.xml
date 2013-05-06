@@ -2,9 +2,10 @@
 <resources>
 
     <string name="app_name">Flashcard13</string>
-    <string name="title_view_decks">View Decks</string>
     <string name="title_view_deck">View Deck</string>
+    <string name="title_add_deck">Add Deck</string>
     <string name="title_view_card">View Card</string>
+    <string name="title_add_card">Add Card</string>
     
     <string name="action_settings">Settings</string>
     <string name="hello_world">Hello world!</string>
@@ -23,7 +24,15 @@
     <string name="add_deck_name_hint">Deck Name</string>
     <string name="add_deck_save_label">" Save "</string>
     <string name="add_deck_cancel_label">Cancel</string>
-    
+  
     
     <string name="add_card">Add Card</string>
+    
+    <string name="add_front_name_label">Front: (required)</string>
+    <string name="add_front_name_hint">Front of card</string>
+    <string name="add_back_name_label">Back: (required)</string>
+    <string name="add_back_name_hint">Back of card</string>
+    <string name="add_card_save_label">" Save "</string>
+    <string name="add_card_cancel_label">Cancel</string>
+    
 </resources>

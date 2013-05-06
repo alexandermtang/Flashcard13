@@ -30,6 +30,10 @@ public class Deck implements Comparable<Deck>, Serializable {
 		if (!(cards.contains(card))) cards.add(card);
 	} 
 	
+	public Card getCard(String front) {
+		return cards.get(cards.indexOf(new Card(front, "")));
+	}
+	
 	public boolean deleteCard(String front) {
 		Card temp = new Card(front, null);
 		return cards.remove(temp);

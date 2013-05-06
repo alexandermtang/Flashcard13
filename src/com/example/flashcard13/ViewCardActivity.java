@@ -1,5 +1,8 @@
 package com.example.flashcard13;
 
+import model.Backend;
+import model.Card;
+import model.Deck;
 import android.app.Activity;
 import android.app.Fragment;
 import android.app.FragmentManager;
@@ -7,16 +10,26 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.v4.app.NavUtils;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 public class ViewCardActivity extends Activity
         implements FragmentManager.OnBackStackChangedListener {
     private Handler mHandler = new Handler();
     private boolean mShowingBack = false;
+    
+    public static final String CARD_FRONT = "cardFront";
+    public static final String CARD_BACK = "cardBack";
+    
+    Backend backend = Backend.getInstance(this);
+    Deck deck;
+    Card card;
+    static TextView frontView, backView;
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -30,6 +43,13 @@ public class ViewCardActivity extends Activity
         } else {
             mShowingBack = (getFragmentManager().getBackStackEntryCount() > 0);
         }
+        
+        Bundle bundle = getIntent().getExtras();
+        deck = backend.load(bundle.getString(ViewDeckActivity.DECK_NAME));
+        card = deck.getCard(bundle.getString(CARD_FRONT));
+        
+        
+        
         getFragmentManager().addOnBackStackChangedListener(this);
     }
 

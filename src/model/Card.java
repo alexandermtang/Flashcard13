@@ -29,11 +29,11 @@ public class Card implements Comparable<Card>, Serializable {
 	public void incrementRight() { right++; }
 	public void incrementWrong() { wrong++; }
 	
-	public String toString() { return front; }
 	public int compareTo(Card card) { return cal.compareTo(card.getCal()); }   
 	public boolean equals(Object o) {
 		if (o == null || !(o instanceof Card)) return false;
 		Card other = (Card)o;
 		return front.equalsIgnoreCase(other.getFront());
 	}
+	public String toString() { return front; }
 }

@@ -1,6 +1,7 @@
 package com.example.flashcard13;
 
 import model.Backend;
+import model.Card;
 import model.Deck;
 import android.content.Intent;
 import android.os.Bundle;
@@ -10,51 +11,61 @@ import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.EditText;
 
-public class AddDeckActivity extends FragmentActivity {
+public class AddCardActivity extends FragmentActivity {
 
-	public static final String DECK_NAME = "deckName";
+	public static final String CARD_FRONT = "cardFront";
+	public static final String CARD_BACK = "cardBack";
 
 	Backend backend = Backend.getInstance(this);
-	EditText deckName;
-	Button deckCancel, deckSave;
+	EditText cardFront, cardBack;
+	Button cardCancel, cardSave;
 	String incompleteMessage="", duplicateMessage="";
+	String deckName;
 
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.add_deck);
+		setContentView(R.layout.add_card);
+		
+		Bundle bundle = getIntent().getExtras();
+		deckName = bundle.getString(ViewDeckActivity.DECK_NAME);
+		
+		cardFront = (EditText) findViewById(R.id.front_name);
+		cardBack = (EditText) findViewById(R.id.back_name);
 
-		deckName = (EditText) findViewById(R.id.deck_name);
+		cardSave = (Button) findViewById(R.id.deck_save);
+		cardCancel = (Button) findViewById(R.id.deck_cancel);
 
-		deckSave = (Button) findViewById(R.id.deck_save);
-		deckCancel = (Button) findViewById(R.id.deck_cancel);
-
-		deckCancel.setOnClickListener(new OnClickListener() {
+		cardCancel.setOnClickListener(new OnClickListener() {
 			public void onClick(View view) {
 				setResult(RESULT_CANCELED);
 				finish();
 			}
 		});
 
-		deckSave.setOnClickListener(new OnClickListener() {
+		cardSave.setOnClickListener(new OnClickListener() {
 			public void onClick(View view) {
 
-				String name = deckName.getText().toString();
+				String front = cardFront.getText().toString();
+				String back = cardBack.getText().toString();
 
-				if (name == null || name.length() == 0) {
-					incompleteMessage += "Name";
+				if (front == null || front.length() == 0 
+						|| back == null || back.length() == 0) {
+					incompleteMessage += "Front/Back";
 					incompleteMessage();
 					return;
 				}
 				
-				// duplicate deck name
-				if (backend.hasDeck(new Deck(name))) {
-					duplicateMessage += name;
+				// duplicate card front 
+				Deck deck = backend.load(deckName);
+				if (deck.hasCard(new Card(front, back))) {
+					duplicateMessage += "Card with front: " + front;
 					duplicateMessage();
 					return;
 				}
 
 				Bundle bundle = new Bundle();
-				bundle.putString(DECK_NAME, deckName.getText().toString().trim());
+				bundle.putString(CARD_FRONT, cardFront.getText().toString().trim());
+				bundle.putString(CARD_BACK, cardBack.getText().toString().trim());
 
 				Intent intent = new Intent();
 				intent.putExtras(bundle);
@@ -63,7 +74,6 @@ public class AddDeckActivity extends FragmentActivity {
 				finish();
 			}
 		});
-
 	}
 
 	private void incompleteMessage() {
@@ -73,7 +83,7 @@ public class AddDeckActivity extends FragmentActivity {
 		bundle.putString(DeckInfoDialogFragment.MESSAGE, incompleteMessage);
 		newFragment.setArguments(bundle);
 
-		newFragment.show(AddDeckActivity.this.getSupportFragmentManager(),
+		newFragment.show(AddCardActivity.this.getSupportFragmentManager(),
 				"incomplete message");
 		return;
 	}
@@ -85,7 +95,7 @@ public class AddDeckActivity extends FragmentActivity {
 		bundle.putString(DeckInfoDialogFragment.MESSAGE, duplicateMessage);
 		newFragment.setArguments(bundle);
 
-		newFragment.show(AddDeckActivity.this.getSupportFragmentManager(),
+		newFragment.show(AddCardActivity.this.getSupportFragmentManager(),
 				"duplicate message");
 		return;
 	}
