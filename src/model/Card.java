@@ -36,6 +36,6 @@ public class Card implements Comparable<Card>, Serializable {
 		return front.equalsIgnoreCase(other.getFront());
 	}
 	public String toString() { 
-		return front + "\nStrength: " + Math.round(getStrength()) + "%"; 
+		return front + "\nStrength: " + Math.round(getStrength()*100) + "%"; 
 	}
 }
